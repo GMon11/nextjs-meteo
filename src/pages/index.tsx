@@ -3,9 +3,25 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
+import Router from "next/router";
+
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ data }: any) {
+
+  const handleSubmit = (e: any) => {
+
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget);
+
+    const lat = formData.get("lat")
+
+    const lng = formData.get("lng")
+
+    Router.push(`/?lat=${lat}&lng=${lng}`)
+
+  }
+
   return (
     <>
       <Head>
@@ -16,26 +32,19 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
+          <p>
+            Insert your coordinates
+          </p>
+          <div style={{ display: "flex", textAlign: "center", justifyContent: "center" }}>
 
-          <div style={{display: "flex"}}>
+            <form onSubmit={handleSubmit}>
 
-            <p>
-              Insert your coordinates
-            </p>
-            <div>
-              <input type="text" />
-            </div>
-            <div>
-              <input type="text" />
-            </div>
+              <input type="text" name="lat" placeholder="Latitude" />
+              <input type="text" name="lng" placeholder="Longitude" />
+              <button type="submit">Search</button>
 
-            <div>
-              <button>Search</button>
-            </div>
-
-
+            </form>
           </div>
-
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -56,75 +65,34 @@ export default function Home() {
         </div>
 
         <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+          <div className={styles.description}>
+            Elevation: {data.elevation}
+          </div>
+
         </div>
 
         <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
 
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
 
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
         </div>
       </main>
     </>
   );
+}
+
+// This gets called on every request
+export async function getServerSideProps({ query }: any) {
+
+  console.log("query:", query)
+
+  // Fetch data from external API
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${query.lat}&longitude=${query.lng}`)
+  const data = await res.json()
+
+  console.log("data:", data)
+
+
+  // Pass data to the page via props
+  return { props: { data } }
 }
