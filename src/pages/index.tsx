@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
 import Router from "next/router";
+import { getCoordFromCity, getWeather } from "@/api/meteo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +15,10 @@ export default function Home({ data }: any) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget);
 
-    const lat = formData.get("lat")
+    const city = formData.get("city")
 
-    const lng = formData.get("lng")
 
-    Router.push(`/?lat=${lat}&lng=${lng}`)
+    Router.push(`/?city=${city}`)
 
   }
 
@@ -32,18 +32,18 @@ export default function Home({ data }: any) {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
-          <p>
-            Insert your coordinates
-          </p>
-          <div style={{ display: "flex", textAlign: "center", justifyContent: "center" }}>
+          <div className={styles.searchForm}>
+            
+            <div style={{width:"15px"}}></div>
+            <div >
 
-            <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
 
-              <input type="text" name="lat" placeholder="Latitude" />
-              <input type="text" name="lng" placeholder="Longitude" />
-              <button type="submit">Search</button>
+                <input type="text" name="city" placeholder="Insert your city" />
+                <button type="submit">Search</button>
 
-            </form>
+              </form>
+            </div>
           </div>
           <div>
             <a
@@ -84,15 +84,38 @@ export default function Home({ data }: any) {
 // This gets called on every request
 export async function getServerSideProps({ query }: any) {
 
-  console.log("query:", query)
+  let data
+  let error
+  try {
 
-  // Fetch data from external API
-  const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${query.lat}&longitude=${query.lng}`)
-  const data = await res.json()
+    if (!query?.city) {
+      query = {
+        city: "roma"
+      }
+    }
 
-  console.log("data:", data)
+    let coordinates = await getCoordFromCity(query.city);
 
+
+    data = await getWeather(coordinates.results[0]?.latitude?.toString(), coordinates.results[0]?.longitude?.toString())
+
+  } catch (error) {
+
+    error = error
+    return {
+      redirect: {
+        destination: '/500',
+        permanent: false,
+      }
+
+    };
+
+  }
 
   // Pass data to the page via props
-  return { props: { data } }
+  return {
+    props: { data }
+  }
 }
+
+
