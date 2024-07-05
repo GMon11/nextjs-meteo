@@ -1,14 +1,15 @@
+import styles from "@/styles/Home.module.css";
+import { Inter } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 
+import { getCoordFromCity, getWeather } from "@/backend/meteo";
 import Router from "next/router";
-import { getCoordFromCity, getWeather } from "@/api/meteo";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ data }: any) {
+
 
   const handleSubmit = (e: any) => {
 
