@@ -1,6 +1,8 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
+import Header from "../header/header";
+import Footer from "../footer/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 
@@ -14,11 +16,8 @@ const RootLayout = props => (
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <div className="header">
+        <Header />
 
-            <h2>My header</h2>
-
-        </div>
 
         <main className={`${styles.main} ${inter.className}`}>
 
@@ -26,11 +25,7 @@ const RootLayout = props => (
 
         </main >
 
-        <div className="footer">
-            <h2>My footer</h2>
-
-
-        </div>
+        <Footer />
 
     </div>
 )

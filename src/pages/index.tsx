@@ -1,14 +1,8 @@
-import styles from "@/styles/Home.module.css";
-import Image from "next/image";
-
-import RootLayout from '../components/rootLayout'
-
 import { getCoordFromCity, getWeather } from "@/lib/meteo";
+import styles from "@/styles/Home.module.css";
 import Router from "next/router";
 
-
 export default function Home({ data }: any) {
-
 
   const handleSubmit = (e: any) => {
 
@@ -22,54 +16,36 @@ export default function Home({ data }: any) {
   }
 
   return (
+
     <>
-      <RootLayout>
-        <div className={styles.description}>
-          <div className={styles.searchForm}>
 
-            <div style={{ width: "15px" }}></div>
-            <div >
+      <div className={styles.description}>
+        <div className={styles.searchForm}>
 
-              <form onSubmit={handleSubmit}>
+          <div style={{ width: "15px" }}></div>
+          <div >
 
-                <input type="text" name="city" placeholder="Insert your city" />
-                <button type="submit">Search</button>
+            <form onSubmit={handleSubmit}>
 
-              </form>
-            </div>
-          </div>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{" "}
-              <Image
-                src="/Logo_Reply.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={120}
-                height={40}
-                priority
-              />
-            </a>
+              <input type="text" name="city" placeholder="Insert your city" />
+              <button type="submit">Search</button>
+
+            </form>
           </div>
         </div>
+        
+      </div>
 
-        <div className={styles.center}>
-          <div className={styles.description}>
-            Elevation: {data.elevation}
-          </div>
+      <div className={styles.center}>
+       
 
-        </div>
+      </div>
 
-        <div className={styles.grid}>
+      <div className={styles.grid}>
 
 
 
-        </div>
-      </RootLayout>
+      </div>
     </>
   );
 }
