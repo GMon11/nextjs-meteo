@@ -5,7 +5,7 @@ interface Props {
 
 }
 
-const DailyWeather: StorefrontFunctionComponent<Props> = ({
+const DailyWeather_Component: StorefrontFunctionComponent<Props> = ({
 }) => {
     return (
         <>
@@ -19,4 +19,4 @@ const DailyWeather: StorefrontFunctionComponent<Props> = ({
     )
 }
 
-export default DailyWeather
+export default DailyWeather_Component
