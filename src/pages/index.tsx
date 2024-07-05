@@ -1,12 +1,34 @@
+import styles from "@/styles/Home.module.css";
+import { Inter } from "next/font/google";
+
+import {
+  getCoordFromCity,
+  getCurrentWeather,
+  getWeatherDaily,
+  getWeatherHourly,
+} from "@/lib/meteo";
+import Router from "next/router";
+import { CurrentWeather } from "@/typings/currentWeather";
+import { DailyWeather } from "@/typings/dailyWeather";
 import SearchBar from "@/components/searchBar/searchBar";
 import CurrentWeather from "@/components/weather/currentWeather/CurrentWeather";
 import DailyWeather from "@/components/weather/dailyWeather/DailyWeather";
 import { getCoordFromCity, getWeather } from "@/lib/meteo";
 import styles from "@/styles/Home.module.css";
 
-export default function Home({ data }: any) {
+export default function Home({
+  hourlyWeather,
+  currentWeather,
+  dailyWeather,
+}: any) {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
 
+    const city = formData.get("city");
 
+    Router.push(`/?city=${city}`);
+  };
 
   return (
 
@@ -44,39 +66,42 @@ export default function Home({ data }: any) {
 
 // This gets called on every request
 export async function getServerSideProps({ query }: any) {
-
-  let data
-  let error
+  let dailyWeather: DailyWeather;
+  let currentWeather: CurrentWeather;
+  let hourlyWeather: DailyWeather;
+  let error;
   try {
-
     if (!query?.city) {
       query = {
-        city: "roma"
-      }
+        city: "roma",
+      };
     }
 
     let coordinates = await getCoordFromCity(query.city);
-
-
-    data = await getWeather(coordinates.results[0]?.latitude?.toString(), coordinates.results[0]?.longitude?.toString())
-
+    hourlyWeather = await getWeatherHourly(
+      coordinates.results[0]?.latitude?.toString(),
+      coordinates.results[0]?.longitude?.toString()
+    );
+    dailyWeather = await getWeatherDaily(
+      coordinates.results[0]?.latitude?.toString(),
+      coordinates.results[0]?.longitude?.toString()
+    );
+    currentWeather = await getCurrentWeather(
+      coordinates.results[0]?.latitude?.toString(),
+      coordinates.results[0]?.longitude?.toString()
+    );
   } catch (error) {
-
-    error = error
+    error = error;
     return {
       redirect: {
-        destination: '/500',
+        destination: "/500",
         permanent: false,
-      }
-
+      },
     };
-
   }
 
   // Pass data to the page via props
   return {
-    props: { data }
-  }
+    props: { hourlyWeather, dailyWeather, currentWeather },
+  };
 }
-
-
