@@ -242,6 +242,9 @@
   position: relative;
   margin: 10px;
 }
+.weatherWrapper {
+  padding: 2rem;
+}
 
 .background {
   background-color: rgb(141, 141, 141);
@@ -254,7 +257,14 @@
 }
 
 .currentWeather {
-  padding: 10rem;
   z-index: 1;
+  height: 100%;
   position: relative;
+}
+
+.dailyWeather {
+  z-index: 1;
+  height: 100%;
+  position: relative;
+  margin-top: 2rem;
 }
