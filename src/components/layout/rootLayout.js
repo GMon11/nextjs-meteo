@@ -18,11 +18,8 @@ const RootLayout = props => (
 
         <Header />
 
-
         <main className={`${styles.main} ${inter.className}`}>
-
             {props.children}
-
         </main >
 
         <Footer />

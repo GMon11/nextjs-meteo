@@ -1,51 +1,30 @@
+import SearchBar from "@/components/searchBar/searchBar";
 import { getCoordFromCity, getWeather } from "@/lib/meteo";
 import styles from "@/styles/Home.module.css";
-import Router from "next/router";
 
 export default function Home({ data }: any) {
 
-  const handleSubmit = (e: any) => {
 
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget);
-
-    const city = formData.get("city")
-
-    Router.push(`/?city=${city}`)
-
-  }
 
   return (
 
     <>
 
       <div className={styles.description}>
-        <div className={styles.searchForm}>
+        <SearchBar />
 
-          <div style={{ width: "15px" }}></div>
-          <div >
-
-            <form onSubmit={handleSubmit}>
-
-              <input type="text" name="city" placeholder="Insert your city" />
-              <button type="submit">Search</button>
-
-            </form>
-          </div>
-        </div>
-        
       </div>
 
-      <div className={styles.center}>
-       
-
+      <div className={styles.weatherContainer}>
+        <div className={styles.background} />
+        <div className={styles.currentWeather}>
+          <h2>Current weather</h2>
+        </div>
       </div>
 
       <div className={styles.grid}>
-
-
-
       </div>
+
     </>
   );
 }
