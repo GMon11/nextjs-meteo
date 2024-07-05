@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
 
-import { getCoordFromCity, getWeather } from "@/backend/meteo";
+import { getCoordFromCity, getWeather } from "@/lib/meteo";
 import Router from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +17,6 @@ export default function Home({ data }: any) {
     const formData = new FormData(e.currentTarget);
 
     const city = formData.get("city")
-
 
     Router.push(`/?city=${city}`)
 
