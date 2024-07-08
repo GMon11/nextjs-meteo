@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: left;
-  padding: 2.5rem;
+  padding: 7rem 9rem 2.5rem 9rem;
   min-height: 100vh;
   background-image: url(/background.jpg);
   background-repeat: no-repeat;
@@ -241,6 +241,12 @@
 .weatherContainer {
   position: relative;
   margin: 10px;
+  transition: 0.3s ease-out;
+  backdrop-filter:  blur(50px) brightness(0.9);
+  -webkit-backdrop-filter: blur(50px) brightness(0.9);
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  color: white;
+  border-radius: 20px;
 }
 .weatherWrapper {
   padding: 2rem;
@@ -258,8 +264,9 @@
 
 .currentWeather {
   z-index: 1;
-  height: 100%;
   position: relative;
+
+  margin-top: 1rem;
 }
 
 .dailyWeather {
@@ -267,4 +274,8 @@
   height: 100%;
   position: relative;
   margin-top: 2rem;
+}
+
+.cityLabel {
+  font-size: 1.5rem;
 }

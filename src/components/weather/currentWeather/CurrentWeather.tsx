@@ -22,7 +22,7 @@ const CurrentWeather_Component: StorefrontFunctionComponent<Props> = (
             <div className={styles.currentWeatherContainer}>
 
                 <h2>
-                    Current Weather
+                    Current
                 </h2>
                 <div style={{ margin: "15px", display: "flex" }}>
                     <p>Temperature: {temperature}</p>

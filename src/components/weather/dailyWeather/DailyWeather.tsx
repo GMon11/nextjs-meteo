@@ -11,7 +11,7 @@ const DailyWeather_Component: StorefrontFunctionComponent<Props> = ({
         <>
             <div className={styles.dailyWeatherContainer}>
 
-                <h2>Daily Weather</h2>
+                <h2>Daily</h2>
 
             </div>
 

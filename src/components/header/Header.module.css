@@ -1,7 +1,53 @@
-.header {
+.headerContainer {
+
+    transition: 0.3s ease-out;
+    backdrop-filter: blur(50px) brightness(0.9);
+    -webkit-backdrop-filter: blur(50px) brightness(0.9);
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    color: white;
+    font-size: 16px;
+
     padding: 0.5rem;
     text-align: left;
-    background: #1f4a6f;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
+    display: flex;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    margin-left: 10rem;
+}
+
+.logo p {
+    width: max-content;
+    margin: auto;
+    padding-left: 10px;
+}
+
+
+.navBar {
+    width: 100%;
+    margin: auto;
+    text-align: end;
+}
+
+
+.navBar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-right: 10rem;
+    display: inline-flex;
+}
+
+.navBar li {
+    padding: 0px 15px 0px 15px;
+}
+
+.navBar li:hover {
+    color: rgb(255, 0, 0);
 }

@@ -14,23 +14,21 @@ import { DailyWeather } from "@/typings/dailyWeather";
 
 
 export default function Home({
-  
+
   hourlyWeather,
   currentWeather,
   dailyWeather,
-  query
+  city
 }: any) {
 
-  console.log("city:", query)
 
-
-
+  city = city.toUpperCase()
 
   console.log("currentWeather:", currentWeather)
 
 
   console.log("currentWeather?.current?.apparent_temperature:", currentWeather?.current?.apparent_temperature)
-  
+
 
   return (
 
@@ -38,21 +36,21 @@ export default function Home({
 
       <div className={styles.description}>
         <SearchBar />
-
       </div>
 
       <div className={styles.weatherContainer}>
-        <div className={styles.background} />
 
         <div className={styles.weatherWrapper}>
 
-          <div>{}</div>
+          <div className={styles.cityLabel}>
+            Weather of {city}
+          </div>
 
           <div className={styles.currentWeather}>
             <CurrentWeather_Component
               temperature={currentWeather?.current?.apparent_temperature}
-              rainMM = {currentWeather?.current?.rain}
-              windSpeed = {currentWeather?.current?.wind_speed_10m}
+              rainMM={currentWeather?.current?.rain}
+              windSpeed={currentWeather?.current?.wind_speed_10m}
             />
 
 
@@ -80,12 +78,14 @@ export async function getServerSideProps({ query }: any) {
   let currentWeather: CurrentWeather;
   let hourlyWeather: DailyWeather;
   let error;
+  let city: string;
   try {
     if (!query?.city) {
       query = {
         city: "roma",
       };
     }
+    city = query.city
 
     let coordinates = await getCoordFromCity(query.city);
     hourlyWeather = await getWeatherHourly(
@@ -113,7 +113,7 @@ export async function getServerSideProps({ query }: any) {
 
   // Pass data to the page via props
   return {
-    props: { hourlyWeather, dailyWeather, currentWeather, query }
-    
+    props: { hourlyWeather, dailyWeather, currentWeather, city }
+
   };
 }
