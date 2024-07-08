@@ -1,0 +1,22 @@
+.tableWrapper {
+    padding: 1rem;
+}
+
+
+.tableWrapper table {
+    width: 100%;
+    height: 200px;
+}
+ 
+.tableWrapper th {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+ 
+.tableWrapper td {
+    text-align: center;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid rgb(128, 128, 128);
+
+}

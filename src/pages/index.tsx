@@ -11,6 +11,7 @@ import {
 } from "@/lib/meteo";
 import { CurrentWeather } from "@/typings/currentWeather";
 import { DailyWeather } from "@/typings/dailyWeather";
+import HourlyWeather_Component from "@/components/weather/hourlyWeather/HourlyWeather";
 
 
 export default function Home({
@@ -21,13 +22,7 @@ export default function Home({
   city
 }: any) {
 
-
-  city = city.toUpperCase()
-
-  console.log("currentWeather:", currentWeather)
-
-
-  console.log("currentWeather?.current?.apparent_temperature:", currentWeather?.current?.apparent_temperature)
+  console.log("hourlyWeather:", hourlyWeather)
 
 
   return (
@@ -43,7 +38,7 @@ export default function Home({
         <div className={styles.weatherWrapper}>
 
           <div className={styles.cityLabel}>
-            Weather of {city}
+            Weather of {city.toUpperCase()}
           </div>
 
           <div className={styles.currentWeather}>
@@ -52,13 +47,16 @@ export default function Home({
               rainMM={currentWeather?.current?.rain}
               windSpeed={currentWeather?.current?.wind_speed_10m}
             />
-
-
           </div>
 
           <div className={styles.dailyWeather}>
-            <DailyWeather_Component />
+            <DailyWeather_Component dailyData={dailyWeather.daily}/>
           </div>
+
+          <div className={styles.hourlyWeather}>
+            <HourlyWeather_Component hourlyData={hourlyWeather.hourly}/>
+          </div>
+          
         </div>
 
       </div>

@@ -1,0 +1,53 @@
+.tableWrapper {
+    padding: 1rem;
+}
+
+
+.tableWrapper table {
+    width: 100%;
+    height: 200px;
+}
+
+.tableWrapper th {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.tableWrapper td {
+    text-align: center;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.btnContainer {
+    margin-top: 15px;
+}
+
+.btnDay {
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    color: black;
+    background-color: whitesmoke;
+    margin: 0.6rem;
+    border-radius: 15px;
+    border-style: solid;
+}
+
+.btnDay:hover {
+    background-color: black;
+    color: whitesmoke;
+}
+
+.btnDay:focus {
+    background: linear-gradient(#152B40, #152B40);
+    color: white
+}
+
+.btnDay:active {
+    background: linear-gradient(#152B40, #152B40);
+    color: rgb(151, 29, 29)
+}
+.button-selected {
+    border: 4px solid red;
+}
