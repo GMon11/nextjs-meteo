@@ -12,6 +12,7 @@ import {
 import { CurrentWeather } from "@/typings/currentWeather";
 import { DailyWeather } from "@/typings/dailyWeather";
 import HourlyWeather_Component from "@/components/weather/hourlyWeather/HourlyWeather";
+import Image from "next/image";
 
 
 export default function Home({
@@ -40,6 +41,13 @@ export default function Home({
           <div className={styles.cityLabel}>
             Weather of {city.toUpperCase()}
           </div>
+
+          {(city == "bitonto" || city == "foggia"  || city == "cerignola")&& 
+            ( <div style={{textAlign:"center"}}>
+              
+              <Image alt="f" src='/furto.jpg' width={500} height={300}></Image>
+              </div>)
+          }
 
           <div className={styles.currentWeather}>
             <CurrentWeather_Component
