@@ -44,7 +44,7 @@ export default function WeatherPage({ query }: any) {
     }
 
 
-    if (true) {
+    if (isLoading) {
         return (
             <section>
                 <article className='item'>
