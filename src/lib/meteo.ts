@@ -1,3 +1,49 @@
+import { DailyWeather } from "@/typings/dailyWeather";
+import { wait } from "./common";
+import { CurrentWeather } from "@/typings/currentWeather";
+import { HourlyWeather } from "@/typings/hourlyWeather";
+
+export async function getWeatherData(city: string) {
+
+  console.log("city:", city)
+
+
+  try {
+
+    let coordinates = await getCoordFromCity(city)
+
+    let dailyWeather: DailyWeather = await getWeatherDaily(
+      coordinates.results[0]?.latitude?.toString(),
+      coordinates.results[0]?.longitude?.toString()
+    );
+
+    let hourlyWeather: HourlyWeather = await getWeatherHourly(
+      coordinates.results[0]?.latitude?.toString(),
+      coordinates.results[0]?.longitude?.toString()
+    );
+
+    let currentWeather: CurrentWeather = await getCurrentWeather(
+      coordinates.results[0]?.latitude?.toString(),
+      coordinates.results[0]?.longitude?.toString()
+    );
+
+    const data = {
+      dailyWeather: dailyWeather, hourlyWeather: hourlyWeather, currentWeather: currentWeather
+    }
+    return data
+  } catch (error) {
+
+    console.log("error:", error)
+
+
+
+    throw new Error('Fetching weather data from external API')
+  }
+
+}
+
+
+
 export async function getWeatherHourly(lat: string, lng: string) {
   // Fetch data from external API
   const res = await fetch(
@@ -43,7 +89,7 @@ export async function getCoordFromCity(city: string) {
   );
   const data = await res.json();
 
-
+  await wait(2000)
   if (!data?.results?.length || data?.results?.length == 0) {
     console.log(" ");
     console.log("hola");

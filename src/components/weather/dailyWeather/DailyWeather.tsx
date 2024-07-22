@@ -32,26 +32,26 @@ const DailyWeather_Component: StorefrontFunctionComponent<Props> = ({
 
                 <div className={styles.tableWrapper}>
                     <table>
+                        <tbody>
+                            <tr>
+                                <th>Data</th>
+                                <th>Temperature Max</th>
+                                <th>Temperature Min</th>
+                                <th>Rain mm</th>
+                            </tr>
 
-                        <tr>
-                            <th>Data</th>
-                            <th>Temperature Max</th>
-                            <th>Temperature Min</th>
-                            <th>Rain mm</th>
-                        </tr>
+                            {formattedData.map((val: any, key: any) => {
+                                return (
 
-                        {formattedData.map((val: any, key: any) => {
-                            return (
-
-                                <tr key={key}>
-                                    <td>{val.time}</td>
-                                    <td>{val.temperature_2m_max} <Image alt='hot' src={getTemperatureIcon(val.temperature_2m)} width={35} height={30} /></td>
-                                    <td>{val.temperature_2m_min} <Image alt='hot' src={getTemperatureIcon(val.temperature_2m)} width={35} height={30} /></td>
-                                    <td>{val.rain_sum} <Image alt='rain' src={getRainIcon(val.rain_sum)} width={35} height={30} /></td>
-                                </tr>
-                            )
-                        })}
-
+                                    <tr key={key}>
+                                        <td>{val.time}</td>
+                                        <td>{val.temperature_2m_max} <Image alt='hot' src={getTemperatureIcon(val.temperature_2m)} width={35} height={30} /></td>
+                                        <td>{val.temperature_2m_min} <Image alt='hot' src={getTemperatureIcon(val.temperature_2m)} width={35} height={30} /></td>
+                                        <td>{val.rain_sum} <Image alt='rain' src={getRainIcon(val.rain_sum)} width={35} height={30} /></td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
                     </table>
                 </div>
             </div>

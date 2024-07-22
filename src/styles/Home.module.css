@@ -242,12 +242,13 @@
   position: relative;
   margin: 10px;
   transition: 0.3s ease-out;
-  backdrop-filter:  blur(50px) brightness(0.9);
+  backdrop-filter: blur(50px) brightness(0.9);
   -webkit-backdrop-filter: blur(50px) brightness(0.9);
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 20px;
 }
+
 .weatherWrapper {
   padding: 2rem;
 }
@@ -279,4 +280,93 @@
 .cityLabel {
   font-size: 1.5rem;
   text-align: center;
+}
+
+.gallery__grid {
+  display: grid;
+  gap: 2rem;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  justify-content: center;
+}
+
+.gallery__title {
+  font-size: 2rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.item {
+  min-width: 200px;
+  width: 260px;
+  margin: auto;
+  border: 3px solid var(--gray-1);
+  padding: 1rem;
+}
+
+.item__btns {
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.item-img {
+  width: 140px;
+  height: 140px;
+  margin: auto;
+  margin-bottom: 1rem;
+
+ 
+}
+
+.item-title {
+  font-size: 1rem;
+  height: 82px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.item-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.item-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  width: 60px;
+}
+
+.item__btnadd {
+  border: 2px solid var(--red-1);
+  color: var(--red-1)
+}
+
+.item-price {
+  font-size: 2.5rem;
+  color: var(--blue-1);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.item__btnbuy {
+  border: 2px solid var(--red-1);
+  background-color: var(--red-1) !important;
+  color: var(--gray-1);
+}
+
+.item-start {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid yellow;
+
+}
+
+.skeleton {
+  margin-bottom: 1rem;
 }

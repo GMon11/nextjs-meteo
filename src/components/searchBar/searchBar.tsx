@@ -1,23 +1,22 @@
+import Image from "next/image";
 import Router from "next/router";
 import styles from './searchBar.module.css';
-import Image from "next/image";
-
+import { revalidatePath } from 'next/cache'
 
 interface Props {
-
+    redirectPage: string
 }
 
 const SearchBar: StorefrontFunctionComponent<Props> = ({
+    redirectPage = ''
 }) => {
 
-
     const handleSubmit = (e: any) => {
-
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
         const city = formData.get("city")
-        Router.push(`/?city=${city}`)
-
+        //revalidatePath(`/`, "page")
+        Router.push(`/${redirectPage}?city=${city}`)
     }
 
     return (

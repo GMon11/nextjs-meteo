@@ -14,6 +14,9 @@ const HourlyWeather_Component: StorefrontFunctionComponent<Props> = ({
 
     const [dataToShow, setDataToShow] = useState<any>()
 
+    console.log("dataToShow:", dataToShow)
+
+
     let times = hourlyData.time
 
     let dayDatas: any = []
@@ -49,42 +52,42 @@ const HourlyWeather_Component: StorefrontFunctionComponent<Props> = ({
 
     }
 
- 
+
 
     return (
-        <>
-            <div className={styles.dailyWeatherContainer}>
 
-                <h2>Hourly</h2>
+        <div className={styles.dailyWeatherContainer}>
 
-                <div className={styles.btnContainer}>
-                    {
-                        dayDatas.map((val: any, index: any) => {
+            <h2>Hourly</h2>
 
-                            let buttonLabel = val.day
-                            if (index == 0) {
-                                buttonLabel = "Today"
-                            } else if (index == 1) {
-                                buttonLabel = "Tomorrow"
-                            }
-
-                            return (
-                                <button onClick={handleChangeDay} id={index} className={styles.btnDay}>{buttonLabel}</button>
-                            )
-
-                        })
-                    }
-                </div>
-
-
+            <div className={styles.btnContainer}>
                 {
-                    dataToShow?.data ?
+                    dayDatas.map((val: any, index: any) => {
 
-                        <div className={styles.tableWrapper}>
-                            <table>
+                        let buttonLabel = val.day
+                        if (index == 0) {
+                            buttonLabel = "Today"
+                        } else if (index == 1) {
+                            buttonLabel = "Tomorrow"
+                        }
 
+                        return (
+                            <button onClick={handleChangeDay} id={index} className={styles.btnDay}>{buttonLabel}</button>
+                        )
+
+                    })
+                }
+            </div>
+
+
+            {
+                dataToShow?.data ?
+
+                    <div className={styles.tableWrapper}>
+                        <table>
+                            <tbody>
                                 <tr>
-                                    <th>Hour</th>
+                                    <th>Hour server123456</th>
                                     <th>Temperature</th>
                                     <th>Rain mm</th>
                                 </tr>
@@ -101,22 +104,22 @@ const HourlyWeather_Component: StorefrontFunctionComponent<Props> = ({
                                         )
                                     }))}
 
+                            </tbody>
+                        </table>
+                    </div>
 
-                            </table>
+                    : (
+                        <div>
+                            Select a button
                         </div>
-
-                        : (
-                            <div>
-                                Select a button
-                            </div>
-                        )
-                }
+                    )
+            }
 
 
 
-            </div >
+        </div >
 
-        </>
+
     )
 }
 

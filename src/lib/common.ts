@@ -17,13 +17,11 @@ export const getTemperatureIcon = (temperature: string) => {
 
 export const getRainIcon = (rain: string) => {
 
-    console.log("rain:", rain)
 
     let path = ''
 
     const rainFloat = parseFloat(rain)
 
-    console.log("rainFloat:", rainFloat)
 
     if (rainFloat <= 0) {
         path = '/sunnyIcon.svg'
@@ -36,4 +34,12 @@ export const getRainIcon = (rain: string) => {
 
     return path
 
+}
+
+export async function wait(time: number = 500): Promise<boolean> {
+    return new Promise<boolean>((resolve) => {
+        setTimeout(() => {
+            resolve(true);
+        }, time);
+    })
 }

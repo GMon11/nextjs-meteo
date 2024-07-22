@@ -22,7 +22,6 @@ export default function Home({
   city
 }: any) {
 
-  console.log("hourlyWeather:", hourlyWeather)
 
 
   return (
@@ -31,7 +30,7 @@ export default function Home({
 
       <div className={styles.description}>
         <SearchBar />
-      </div>
+      </div> 
 
       <div className={styles.weatherContainer}>
 
@@ -67,8 +66,6 @@ export default function Home({
     </>
   );
 }
-
-
 
 // This gets called on every request
 export async function getServerSideProps({ query }: any) {
